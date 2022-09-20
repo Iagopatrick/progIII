@@ -25,7 +25,9 @@ private class Proprietario{
     //    return meusCarros.toArray(new carro);
     //}
     public listarCarros(){
-        System.out.println(meusCarros);
+        for(int i = 0; i < meusCarros.lenght; i++){
+            System.out.println(meusCarros[i]);
+        }
     }
     
     public String getNome(){
