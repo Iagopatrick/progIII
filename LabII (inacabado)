@@ -1,0 +1,61 @@
+import java.until;
+
+private class Proprietario{
+    private String nome;
+    private String cnh;
+    private ArrayList<Carro> meusCarros = new ArrayList()<Carro>;
+    
+    
+    public void addCarro(String nomeCarro){
+        meusCarros.add(nomeCarro);
+    }
+    public setNome(String nome){
+        this.nome = nome;
+    }
+    public boolean setCnh(String cnh){
+        if(cnh.lenght == 7){
+            this.cnh = cnh;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    //public Carro[] getCarros(){
+    //    return meusCarros.toArray(new carro);
+    //}
+    public listarCarros(){
+        System.out.println(meusCarros);
+    }
+    
+    public String getNome(){
+        return nome;
+    }
+}
+
+private class Carro{
+    private String modelo;
+    private String placa;
+    private ArrayList<Multa> multas = new ArrayList()<Multa>;
+    
+    public boolean setPlaca(String placa){
+        if(placa.length() != 7){
+            return false;
+        }
+        else{
+            this.placa = placa;
+            return true;
+        }
+    }
+}
+
+private class Multa{
+    String infracao;
+    Float valor;
+}
+
+public class App {
+    
+    
+    
+}
