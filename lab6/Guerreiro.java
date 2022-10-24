@@ -1,17 +1,18 @@
-import java.util.Random;
+
 
 public class Guerreiro extends Combatente implements Tanque{
-	private Arma espada = new Arma("sword", 25);
-	resistencia = 50;
+	private Arma espada;
+	private int resistencia = 50;
 
 	public Guerreiro(String identificacao){
     	super(identificacao);
+		this.espada = new Arma("sword", 25);
 	}
     
 	public int resistencia(int damage){
 		resistencia -= damage;
 		if(resistencia < 0){
-			resistencia = 0
+			resistencia = 0;
 		}
 		return resistencia;
 	}

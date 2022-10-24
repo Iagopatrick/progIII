@@ -13,7 +13,7 @@ public class Lutador extends Combatente implements Boxeador{
 		return 30;
 	}
     public int gancho(){
-		return 35
+		return 35;
 	}
 	public int combo(){
 		return 110;
@@ -24,16 +24,16 @@ public class Lutador extends Combatente implements Boxeador{
 	@Override
 	public void atacar(Combatente adversario){
 		float auxAtaque = (float) Math.random();
-		if(0.0 <= auxAtaque < 0.2){
+		if(0.0 <= auxAtaque && auxAtaque < 0.2){
 			adversario.defender(jab());
 		}
-		if else(0.2 <= auxAtaque < 0.4){
+		else if(0.2 <= auxAtaque && auxAtaque < 0.4){
 			adversario.defender(direto());
 		}
-		if else(0.4 <= auxAtaque < 0.6){
+		else if(0.4 <= auxAtaque && auxAtaque < 0.6){
 			adversario.defender(cruzado());
 		}
-		if else(0.6 <= auxAtaque < 0.8){
+		else if(0.6 <= auxAtaque && auxAtaque< 0.8){
 			adversario.defender(gancho());
 		}
 		else{

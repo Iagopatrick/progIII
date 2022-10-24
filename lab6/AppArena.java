@@ -60,7 +60,7 @@ public class AppArena {
 
 
     public AppArena(int qntdCombatentes){
-        this.qntdCombatentes = qntdCombatentes;
+        AppArena.qntdCombatentes = qntdCombatentes;
         combatentes = geraCombatentes(qntdCombatentes);
     }
 

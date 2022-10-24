@@ -11,5 +11,8 @@ public class Arma{
     	return dano;
 	}
     
+	public String getNome(){
+		return nome;
+	}
     
 }

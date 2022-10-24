@@ -3,7 +3,7 @@ public abstract class Combatente {
 	protected String identificacao;
 	protected int energia;
     
-	public void atacar(Combatente adversario);
+	public abstract void atacar(Combatente adversario);
        	 
 	public void defender(int ataque){
     	energia -= ataque;
