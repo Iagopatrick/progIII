@@ -1,18 +1,11 @@
-public class Arma{
-	private String nome;
-	private int dano;
+public absctract class Arma{
+	//1 -> Espada 2 -> Lança
+	int durabilidade;
+	int golpear();
+	/* talvez espada e lança precisem ser objetos, pois elas podem ter especificações
+	e colocar arma como abstrata, que precise ter o tipo golpear
+	Tudo depende da modelagem
+	*/
     
-	public Arma(String nome, int dano){
-    	this.dano = dano;
-    	this.nome = nome;
-	}
-    
-	public int cortar(){
-    	return dano;
-	}
-    
-	public String getNome(){
-		return nome;
-	}
     
 }

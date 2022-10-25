@@ -1,16 +1,22 @@
 
 
-public class Guerreiro extends Combatente implements Tanque{
-	private Arma espada;
+public class Guerreiro extends Lutador implements Tanque{
+
+	private Arma armas[];
 	private int resistencia = 50;
 
 	public Guerreiro(String identificacao){
     	super(identificacao);
-		this.espada = new Arma("sword", 25);
+		// if(Math.random() > 0.5){
+			// this.arma = new Arma(1, 25);
+		// }
+		// else{
+			// this.arma = new Arma(2, 40);
+		// }
 	}
     
 	public int resistencia(int damage){
-		resistencia -= damage;
+		resistencia -= (int)damage / 2;
 		if(resistencia < 0){
 			resistencia = 0;
 		}
@@ -34,7 +40,7 @@ public class Guerreiro extends Combatente implements Tanque{
 			adversario.defender(empurrao());
 		}
 		else{
-			adversario.defender(corte());
+			adversario.defender(arma.golpe());
 		}
 
 	}
