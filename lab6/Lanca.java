@@ -1,4 +1,4 @@
-public class Lanca implements Arma{
+public class Lanca extends Arma{
     private int dano;
     private int durabilidade = 100;
 
@@ -26,4 +26,10 @@ public class Lanca implements Arma{
         }
 
     }
+
+    public Lanca(int dano, int durabilidade){
+        this.dano = dano;
+        this.durabilidade = durabilidade;
+    }
+
 }

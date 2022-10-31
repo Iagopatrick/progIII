@@ -1,18 +1,18 @@
 
 
 public class Guerreiro extends Lutador implements Tanque{
-
+	static int qntdArmas = 0;
 	private Arma armas[];
 	private int resistencia = 50;
 
 	public Guerreiro(String identificacao){
     	super(identificacao);
-		// if(Math.random() > 0.5){
-			// this.arma = new Arma(1, 25);
-		// }
-		// else{
-			// this.arma = new Arma(2, 40);
-		// }
+		if(Math.random() > 0.5){
+			armas[0] = new Espada(25, 25);
+		}
+		else{
+			armas[0]= new Lanca(2, 40);
+		}
 	}
     
 	public int resistencia(int damage){
@@ -25,9 +25,7 @@ public class Guerreiro extends Lutador implements Tanque{
 	
 
 
-	public int corte(){
-    	return espada.cortar();
-	}
+	
     
 	public int empurrao(){
     	return 10;
@@ -40,7 +38,7 @@ public class Guerreiro extends Lutador implements Tanque{
 			adversario.defender(empurrao());
 		}
 		else{
-			adversario.defender(arma.golpe());
+			adversario.defender(armas[0].golpear());
 		}
 
 	}

@@ -1,4 +1,4 @@
-public class Espada implements Arma{
+public class Espada extends Arma{
     private int dano;
     private int durabilidade;
     
@@ -7,7 +7,12 @@ public class Espada implements Arma{
     }
 
     public int golpear(){
-        return cortar();
+        durabilidade -= 10;
+        if(durabilidade <= 0){
+
+            return cortar();
+        }
+        return 5;
     }
 
     public Espada(int dano, int durabilidade){
