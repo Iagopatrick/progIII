@@ -1,3 +1,4 @@
+package src;
 public class Lanca extends Arma{
     private int dano;
     private int durabilidade = 100;

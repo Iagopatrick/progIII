@@ -1,3 +1,4 @@
+package src;
 public class Espada extends Arma{
     private int dano;
     private int durabilidade;
