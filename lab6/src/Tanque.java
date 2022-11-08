@@ -1,4 +1,4 @@
 package src;
 public abstract interface Tanque{
-    int resistencia(int damage);
+    int armor(int damage);
 }

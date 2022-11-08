@@ -40,6 +40,7 @@ public class AppArena {
         while(combatente1.getIsAlive() && combatente2.getIsAlive() ){
             if (turno == 1){
                 combatente1.atacar(combatente2);
+
                 if(combatente2.getIsAlive() != false){
                     combatente2.atacar(combatente1);
                 }
@@ -50,7 +51,7 @@ public class AppArena {
                     combatente1.atacar(combatente1);
                 }
             }
-            turno += -1;
+            turno *= -1;
             System.out.println("[" + combatente1.getIdentificacao() + " - " + combatente1.getEnergia() + "]");
             System.out.println("[" + combatente2.getIdentificacao() + " - " + combatente2.getEnergia() + "]");
             
@@ -66,7 +67,7 @@ public class AppArena {
 
     public void torneio(){
         for(int i = 0; i < qntdCombatentes - 1; i+= 2){
-            System.out.println("Torneio comeca com: " + combatentes[i].getIdentificacao() + " vs " + combatentes[i+1].getIdentificacao());
+            System.out.println("Torneio comeca com: " + combatentes[i].getIdentificacao() +":"+ combatentes[i].getEnergia() + " vs " + combatentes[i+1].getIdentificacao() + ":" + combatentes[i].getEnergia());
             Combatente ganhador = combate(combatentes[i], combatentes[i+1]);
             System.out.println("Vencedor e: " + ganhador.getIdentificacao());
         }
@@ -87,19 +88,21 @@ public class AppArena {
 				//returns a Boolean value  
 			{
 				String[] data = line.split(splitBy);
+                int energia = Integer.parseInt(data[2]);
 				if(data[0].equalsIgnoreCase("Boxeador")) {
-					Combatente boxeador = new Boxeador(data[1]);
+					Combatente boxeador = new Boxeador(data[1], energia);
 					combatentes.add(boxeador);
 				}else {
 
-						Combatente guerreiro = new Guerreiro(data[1]);
+						Combatente guerreiro = new Guerreiro(data[1], energia);
                         combatentes.add(guerreiro);
 					}
 				
-			}
+                qntdCombatentes++;
+            }
 			this.combatentes = new Combatente[combatentes.size()];
 			combatentes.toArray(this.combatentes); //converte arraylist para vetor.
-            qntdCombatentes++;
+            
 		}
 		catch(IOException e) {
 			e.printStackTrace();
@@ -114,7 +117,7 @@ public class AppArena {
 
     public static void main(String[] args) {
     	String filePath;
-        filePath = "./lab6/src/arquivoArena.csv";
+        filePath = "C:/Users/Iago Patrick/Desktop/progIII/lab6/src/arquivoArena.csv";
 
 
         AppArena arena = new AppArena(filePath);

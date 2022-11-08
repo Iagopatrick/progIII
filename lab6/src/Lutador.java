@@ -3,6 +3,12 @@ public class Lutador extends Combatente{
 	public Lutador(String identificacao){
     	super(identificacao);
 	}
+
+	public Lutador(String identificacao, int energia){
+		super(identificacao, energia);
+	}
+
+
     int socar(){
 		return 30;
 	}

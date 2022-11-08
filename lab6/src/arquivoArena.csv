@@ -1,5 +1,5 @@
-tipoCombatente;nomeCombatente
-Boxeador;Julio
-Guerreiro;Cabeca
-Guerreiro;Lindo
-Boxeador;Julnio
+tipoCombatente;identificacaoCombatente;nivelEnergia
+Boxeador;Julio;150
+Guerreiro;Cabeca;100
+Guerreiro;Lindo;100
+Boxeador;Mike;150

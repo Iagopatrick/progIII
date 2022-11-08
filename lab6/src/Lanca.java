@@ -3,8 +3,6 @@ public class Lanca extends Arma{
     private int dano;
     private int durabilidade = 100;
 
-
-
     public int perfurar(){
         if(durabilidade > 0){
             durabilidade -= 10;

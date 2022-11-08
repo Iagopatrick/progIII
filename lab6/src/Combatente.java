@@ -34,4 +34,10 @@ public abstract class Combatente {
 		energia = 100;
 		isAlive = true;
 	}
+
+	public Combatente(String identificacao, int energia){
+		this.energia = energia;
+		this.identificacao = identificacao;
+		isAlive = true;
+	}
 }
