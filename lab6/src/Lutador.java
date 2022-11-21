@@ -16,6 +16,15 @@ public class Lutador extends Combatente{
 		return 30;
 	}
 
+
+
+
+	public String textToCSV() {
+		String retorno = "Lutador;" + this.identificacao +";" + String.format("%.2f", this.energia) + "\r\n";
+		return retorno;
+	};
+
+
 	@Override
 	public void atacar(Combatente adversario){
 		if(Math.random() > 0.5){

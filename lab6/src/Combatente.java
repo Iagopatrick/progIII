@@ -40,4 +40,15 @@ public abstract class Combatente {
 		this.identificacao = identificacao;
 		isAlive = true;
 	}
+
+	public boolean equals(Object object){
+		boolean sameSame = false;
+		if(object != null && object instanceof Combatente){
+			sameSame = this.identificacao.equals(((Combatente)object).identificacao);
+		}
+
+		return sameSame;
+	}
+
+	public abstract String textToCSV();
 }

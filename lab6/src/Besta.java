@@ -15,6 +15,13 @@ public class Besta extends Combatente{
         return 30;
     }
 
+
+    public String textToCSV() {
+		String retorno = "Besta;" + this.identificacao +";" + String.format("%.2f", this.energia) + "\r\n";
+		return retorno;
+	};
+
+
     
     public void atacar(Combatente adversario) {
         if(Math.random() < 0.5){

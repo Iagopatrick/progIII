@@ -35,6 +35,9 @@ public class Guerreiro extends Lutador{
 		this.armaduras.addAll(armaduras);
 	}
 
+	public ArrayList<Arma> getArmas(){
+		return armas;
+	}
 
 	public Arma getArma(String nomeArma) {
 		
@@ -47,7 +50,10 @@ public class Guerreiro extends Lutador{
 		
 	}
 
-
+	public ArrayList<Armadura> getArmaduras() {
+		return armaduras;
+	}
+	
 
 
 	public Armadura getArmadura(String nomeArmadura) {
@@ -72,6 +78,27 @@ public class Guerreiro extends Lutador{
 
 
 	
+	public String textToCSV() {
+		String retorno = "";	
+		String header = "Guerreiro;" + this.identificacao +";" + String.format("%.2f", this.energia) + ";";
+		
+		for (Arma arma : armas) {
+			ArrayList<Golpe> golpes = arma.golpes;
+			for (Golpe golpe : golpes) {
+				retorno+=header + arma.nome + ";" + golpe.nomeDoGolpe + ";" + String.format("%.2f", golpe.poderOfensivo) + "\r\n";
+			}
+		}
+		
+		for (Armadura armadura : armaduras) {
+			retorno+=header + ";;;" + armadura.nome+ ";" +String.format("%.2f",armadura.poderDeDefesa) + ";" + String.format("%.2f",armadura.poderDeDefesa) + "\r\n";
+		}
+		
+		return retorno;
+	};
+
+
+
+
 	@Override
 	public void atacar(Combatente adversario){
 		float auxAtaque = (float)Math.random();

@@ -28,6 +28,12 @@ public class Boxeador extends Lutador implements ArtesMarciais{
 	}
 
 
+
+	public String textToCSV() {
+		String retorno = "Boxeadr;" + this.identificacao +";" + String.format("%.2f", this.energia) + "\r\n";
+		return retorno;
+	};
+
 	@Override
 	public void atacar(Combatente adversario){
 		float auxAtaque = (float) Math.random();

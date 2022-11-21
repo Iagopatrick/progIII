@@ -1,15 +1,12 @@
 package src;
 import java.util.ArrayList;
-// import java.util.Iterator;
-
-// import javax.swing.JFileChooser;
-// import javax.swing.JOptionPane;
-
+import java.util.Locale;
 import java.io.BufferedReader;
-// import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-// import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 
 
 
@@ -35,12 +32,67 @@ public class AppArena {
         return combatentes;
     }
 
-    public Combatente combate(Combatente combatente1, Combatente combatente2){
+// Parte do combate no app
+
+    public void listarCombatentes(){
+        System.out.println("Combatentes:");
+		for (int i = 0; i < combatentes.length; i++) {
+			System.out.println(" "+ i + ": " + combatentes[i]);
+		}
+    }
+
+    
+    public int qntdCombatentesVivos(){
+        int retorno = 0;
+        for(int i = 0; i < combatentes.length; i++){
+            retorno += combatentes[i].getIsAlive()? 1:0;
+        }
+        return retorno;
+    }
+
+    public int indiceProxCombatente(int index){
+        int i = index;
+        while(i != (index - 1)){
+            if(i > combatentes.length - 1){
+                i = 0;
+            }
+            if(combatentes[i].getIsAlive()){
+                return i;
+            }
+            i++;
+        }
+        return -1;
+        
+    }
+    public void torneio(){
+        listarCombatentes();
+        int index = 0;
+        while(qntdCombatentesVivos() > 1){
+            int indiceCombatente1 = indiceProxCombatente(index);
+            Combatente combatente1 = combatentes[indiceCombatente1];
+            
+            index = indiceCombatente1 + 1;
+            
+            int indiceCombatente2 = indiceProxCombatente(index);
+            
+            
+            if(indiceCombatente2 != -1){
+                Combatente combatente2 = combatentes[indiceCombatente2];
+                System.out.println("Combate: " + combatente1.getIdentificacao() +":"+ combatente1.getEnergia()  + " vs " + combatente2.getIdentificacao() + ":" + combatente2.getEnergia());
+                index = indiceCombatente2 + 1;
+                combate(combatente1, combatente2);
+            }
+        }
+
+
+    }
+
+    public void combate(Combatente combatente1, Combatente combatente2){
         int turno = 1;
         while(combatente1.getIsAlive() && combatente2.getIsAlive() ){
             if (turno == 1){
                 combatente1.atacar(combatente2);
-
+    
                 if(combatente2.getIsAlive() != false){
                     combatente2.atacar(combatente1);
                 }
@@ -53,28 +105,32 @@ public class AppArena {
             }
             turno *= -1;
             System.out.println("[" + combatente1.getIdentificacao() + " - " + combatente1.getEnergia() + "]");
-            System.out.println("[" + combatente2.getIdentificacao() + " - " + combatente2.getEnergia() + "]");
+            System.out.println("[" + combatente2.getIdentificacao() + " - " + combatente2.getEnergia() + "]");   
+        }
+
+        Combatente vencedor = combatente1.getIsAlive()? combatente1:combatente2;
+
+        System.out.println("Vencedor e: " + vencedor.getIdentificacao());
+
+        if((combatente1 instanceof Guerreiro) && (combatente2 instanceof Guerreiro)){
+            Combatente perdedor = combatente1.getIsAlive()? combatente2:combatente1;
+            ((Guerreiro)vencedor).addArma(((Guerreiro)perdedor).getArmas());
+            ((Guerreiro)vencedor).addArmadura(((Guerreiro)perdedor).getArmaduras());
             
         }
 
-        if(combatente1.getIsAlive() == true){
-            return combatente1;
-        }
-        else{
-            return combatente2;
-        }
+        
     }
-
-    public void torneio(){
-        for(int i = 0; i < qntdCombatentes - 1; i+= 2){
-            System.out.println("Torneio comeca com: " + combatentes[i].getIdentificacao() +":"+ combatentes[i].getEnergia() + " vs " + combatentes[i+1].getIdentificacao() + ":" + combatentes[i].getEnergia());
-            Combatente ganhador = combate(combatentes[i], combatentes[i+1]);
-            System.out.println("Vencedor e: " + ganhador.getIdentificacao());
+    
+    public Combatente getVencedor(){
+        
+        if(qntdCombatentes == 1){
+            int indice = indiceProxCombatente(0);
+            return combatentes[indice];
         }
+        return null;
     }
-
-
-
+    
     public AppArena(String csvFilePath) {
 		ArrayList<Combatente> combatentes = new ArrayList<Combatente>(); 
 		
@@ -157,13 +213,48 @@ public class AppArena {
 
 
     public static void main(String[] args) {
-    	String filePath;
-        filePath = "C:/Users/Iago Patrick/Desktop/progIII/lab6/src/arquivoArena.csv";
+    	// String filePath;
+        // filePath = "C:/Users/Iago Patrick/Desktop/progIII/lab6/src/arquivoArena.csv";
 
 
-        AppArena arena = new AppArena(filePath);
-        arena.torneio();
+        // AppArena arena = new AppArena(filePath);
+        // arena.torneio();
 
+        
+        
+
+		Locale.setDefault(Locale.ENGLISH); //necessário para o Lab 09
+		String strFileName = "./saida.csv";		
+
+		try {
+			//AppArena arena =  new AppArena(filePath);
+			
+				
+			//Path fileName = Path.of("./res/torneios.csv");
+			Path fileName = Path.of(strFileName);
+			
+			Files.writeString(
+					fileName, 
+					"tipoPersonagem;nomePersonagem;nivelEnergia;descricaoArma;"
+							+ "descicaoGolpe;poderOfensivoGolpe;descricaoArmadura;"
+							+ "poderDefesaArmadura;estadoConservacaoArmadura\r\n");
+
+
+			for (int i = 0; i < 10; i++) {		   
+				AppArena arena =  new AppArena(10);
+				arena.torneio();
+				Combatente campeao = arena.getVencedor();		
+
+		    	//Files.writeString(fileName, campeao.toString()+"\r\n");
+				Files.writeString(fileName, campeao.textToCSV(), StandardOpenOption.APPEND);
+
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Erro na gravação do arquivo");
+			e.printStackTrace();
+		}
 
 	}
 

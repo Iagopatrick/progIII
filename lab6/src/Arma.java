@@ -11,13 +11,11 @@ public  class Arma{
 	}
 
 	
-
 	public void addGolpe(String nomeGolpe, int poderOfensivo) {
 		golpes.add(new Golpe(nomeGolpe,  poderOfensivo));
 	}
 
 
-    
 	public Golpe pegarGolpeRandomico() {
 		if(golpes.size() > 0) {
 			int tipoGolpe = (int) (Math.random() * golpes.size());
