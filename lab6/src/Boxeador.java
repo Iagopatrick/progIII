@@ -1,10 +1,11 @@
 package src;
 public class Boxeador extends Lutador implements ArtesMarciais{
 
-    // public Boxeador(String identificacao){
-    //     super(identificacao);
-    //     energia = 150;
-    // }
+    public Boxeador(String identificacao){
+        super(identificacao);
+        energia = 150;
+    }
+	
 	public Boxeador(String identificacao, int energia){
 		super(identificacao, energia);
 	}

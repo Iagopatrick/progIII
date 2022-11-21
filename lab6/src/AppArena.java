@@ -14,26 +14,26 @@ import java.io.IOException;
 
 
 public class AppArena {
-    // static int qntdLutadores = 0;
-    // static int qntdGuerreiros = 0;
+    static int qntdBoxeadores = 0;
+    static int qntdGuerreiros = 0;
 
     Combatente combatentes[];
     static int qntdCombatentes = 0;
 
 
-    // private Combatente[] geraCombatentes(int qntdCombatentes){
-    //     Combatente[] combatentes = new Combatente[qntdCombatentes];
-    //     for(int i = 0; i < qntdCombatentes; i++){
-    //         if(Math.random() < 0.5){
-    //             combatentes[i] = new Lutador("Boxeador " + ++qntdLutadores);
-    //         }
-    //         else{
-    //             combatentes[i] = new Guerreiro("Guerreiro " + ++qntdGuerreiros);
-    //         }
-    //         System.out.println(combatentes[i].getIdentificacao());
-    //     }
-    //     return combatentes;
-    // }
+    private Combatente[] geraCombatentes(int qntdCombatentes){
+        Combatente[] combatentes = new Combatente[qntdCombatentes];
+        for(int i = 0; i < qntdCombatentes; i++){
+            if(Math.random() < 0.5){
+                combatentes[i] = new Boxeador("Boxeador " + ++qntdBoxeadores);
+            }
+            else{
+                combatentes[i] = new Guerreiro("Guerreiro " + ++qntdGuerreiros);
+            }
+            System.out.println(combatentes[i].getIdentificacao());
+        }
+        return combatentes;
+    }
 
     public Combatente combate(Combatente combatente1, Combatente combatente2){
         int turno = 1;
@@ -85,23 +85,64 @@ public class AppArena {
 			//BufferedReader br = new BufferedReader(new FileReader("C:\\Users\\Dell\\Desktop\\csvDemo.csv"));
 			BufferedReader br = new BufferedReader(new FileReader(csvFilePath));
 			while ((line = br.readLine()) != null)
-				//returns a Boolean value  
+            //returns a Boolean value  
 			{
-				String[] data = line.split(splitBy);
+                String[] data = line.split(splitBy);
                 int energia = Integer.parseInt(data[2]);
 				if(data[0].equalsIgnoreCase("Boxeador")) {
-					Combatente boxeador = new Boxeador(data[1], energia);
+					Boxeador boxeador = new Boxeador(data[1], energia);
 					combatentes.add(boxeador);
-				}else {
+				}
+                else if(data[0].equalsIgnoreCase("Besta")){
+                    Besta besta = new Besta(data[0], energia);
+                    combatentes.add(besta);
+                }
+                else {
 
-						Combatente guerreiro = new Guerreiro(data[1], energia);
-                        combatentes.add(guerreiro);
+						Guerreiro guerreiro = new Guerreiro(data[1], energia);
+                        
+
+                        int index = combatentes.indexOf(guerreiro);
+                        if(index == -1){
+                            combatentes.add(guerreiro);
+                        }
+                        else{
+                            guerreiro = (Guerreiro) combatentes.get(index);
+                        }
+                        // Colocando armas
+                        if(data.length == 6){
+                            String descicaoArma = data[3];
+							String nomeGolpe = data[4];
+							int poderOfensivo = Integer.parseInt(data[5]);
+													
+							//Verifica se arma já foi criada					
+							Arma arma = guerreiro.getArma(descicaoArma);
+							if(arma == null) {
+								arma = new Arma(descicaoArma);
+								guerreiro.addArma(arma);
+							}
+							
+							arma.addGolpe(nomeGolpe, poderOfensivo);	
+							
+							
+                        }
+                        if(data.length == 9) {
+							String descicaoArmadura = data[6];
+							int poderDefensivo = Integer.parseInt(data[7]);
+							int estadoConservacao = Integer.parseInt(data[8]);
+																									
+							Armadura armadura = new Armadura(descicaoArmadura,poderDefensivo,estadoConservacao);
+							guerreiro.addArmadura(armadura);
+							
+						}
+
 					}
 				
-                qntdCombatentes++;
+                    qntdCombatentes++;
             }
-			this.combatentes = new Combatente[combatentes.size()];
-			combatentes.toArray(this.combatentes); //converte arraylist para vetor.
+            this.combatentes = new Combatente[combatentes.size()];
+            combatentes.toArray(this.combatentes); //converte arraylist para vetor.
+            br.close();
             
 		}
 		catch(IOException e) {
@@ -109,10 +150,10 @@ public class AppArena {
 		}
 	}
 
-    // public AppArena(int qntdCombatentes){
-    //     AppArena.qntdCombatentes = qntdCombatentes;
-    //     combatentes = geraCombatentes(qntdCombatentes);
-    // }
+    public AppArena(int qntdCombatentes){
+        AppArena.qntdCombatentes = qntdCombatentes;
+        combatentes = geraCombatentes(qntdCombatentes);
+    }
 
 
     public static void main(String[] args) {

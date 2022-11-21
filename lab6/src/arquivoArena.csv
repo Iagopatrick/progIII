@@ -1,5 +1,8 @@
-tipoCombatente;identificacaoCombatente;nivelEnergia
-Boxeador;Julio;150
-Guerreiro;Cabeca;100
-Guerreiro;Lindo;100
-Boxeador;Mike;150
+tipoPersonagem;nomePersonagem;nivelEnergia;descricaoArma;descicaoGolpe;poderOfensivoGolpe;descricaoArmadura;poderDefesaArmadura;estadoConservacaoArmadura
+Besta;X;150;;;;;;
+Boxeador;Mike Tyson;100;;;;;;
+Guerreiro;Spiculus;80;espada;golpe rodado;150;;;
+Guerreiro;Spiculus;80;lança;arremesso;100;;;
+Guerreiro;Spiculus;80;lança;perfurar;50;;;
+Guerreiro;Spiculus;80;;;;Corpo de Bronze;50;100
+Guerreiro;Spiculus;80;;;;Escudo de Mão;20;100
